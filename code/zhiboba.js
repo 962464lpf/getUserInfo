@@ -2,9 +2,8 @@ jsonpGetJSON(
   'https://bbs.zhibo8.cc/user/userinfo?device=pc&_=1584613345023',
   'callback'
 ).then(function (t) {
-  console.log(t)
   let data = {
-    username: t.bbs_user_info.username,
+    userName: t.bbs_user_info.username,
     photo: t.bbs_user_info.avatar_big,
     homePage: 'https://home.zhibo8.cc/user.html?platform=pc&uid='.concat(
       t.bbs_user_info.uid
@@ -19,8 +18,7 @@ jsonpGetJSON(
     <p>个人主页: ${data.homePage}</p>
   </div>
 `
-  let dom = document.createElement('div')
-  dom.innerHTML = innerHTML
-  document.getElementById('content').appendChild(dom)
-  console.log(data)
+  if (data.userName) {
+    getInifoData({ type: 'zhibo8', data: data, html: innerHTML })
+  }
 })

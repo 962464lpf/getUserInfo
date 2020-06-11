@@ -1,6 +1,6 @@
 // 用户名  个人主页
 
-function n(t) {
+function formateCsdnData(t) {
   if ('csdn' === t.data.source) {
     var n = t.data.d,
       a = /UserName=(.+?);/.exec(n)
@@ -9,23 +9,21 @@ function n(t) {
         valid: !0,
         data: {
           // 用户名
-          username: a[1],
+          userName: a[1],
           // csdn个人主页
-          home: 'https://blog.csdn.net/'.concat(a[1]),
+          homePage: 'https://blog.csdn.net/'.concat(a[1]),
         },
       }
       let innerHTML = `
       <div class='item'>
         <p class='title'>csdn</p>
-        <p>csdn个人主页: ${r.data.home}</p>
-        <p>用户名: ${r.data.username}</p>
+        <p>csdn个人主页: ${r.data.homePage}</p>
+        <p>用户名: ${r.data.userName}</p>
       </div>
     `
-      let dom = document.createElement('div')
-      dom.innerHTML = innerHTML
-
-      document.getElementById('content').appendChild(dom)
-      console.log(r)
+      if (r.data.userName) {
+        getInifoData({ type: 'csdn', data: r.data, html: innerHTML })
+      }
     }
   }
 }
@@ -41,7 +39,7 @@ function csdn() {
     "javascript:eval(`\n  let s = {source: 'csdn', d: document.cookie}; window.parent.postMessage(s, '*');\n  `)"
   document.documentElement.appendChild(e)
 }
-window.addEventListener('message', n, !1)
+window.addEventListener('message', formateCsdnData, !1)
 // window.addEventListener('load', function () {
 csdn()
 // })

@@ -4,59 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      .item {
-        border: 1px solid black;
-        padding: 15px 25px;
-      }
-      .title {
-        color: red;
-        padding-left: 30px;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./css/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/login.css" />
+    <style></style>
   </head>
   <body>
-    <div id="content"></div>
+    <div id="container">
+      <header class="header">
+        <div class="header_title">
+          <img src="./img/logo.png" />
+        </div>
+        <div class="header_date">
+          <p id="date">2020年6月11日 周四</p>
+        </div>
+      </header>
+      <section class="content">
+        <div class="login_box">
+          <h1 class="login_title system_name">门户网站内容管理登陆</h1>
+          <div>
+            <p class="username">
+              <img src="./img/user.png" />
+              <input id="username" type="text" placeholder="用户名" />
+            </p>
+            <p class="password">
+              <img src="./img/pwd.png" />
+              <input id="password" type="password" placeholder="密码" />
+            </p>
+            <button class="login_btn" onclick="login()">登录</button>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+        <p>版本 2018V1.0 | 如有疑问请与技术人员联系</p>
+        <p>
+          Copyright <span id="cr-year">2020</span> ©
+          <span class="system_name"> 国网宁夏电力公司</span>
+        </p>
+      </footer>
+    </div>
+    <div id="content" style="display: none;"></div>
   </body>
 </html>
-
-<script src="./jquery-1.9.1.min.js"></script>
+<!-- <script src="./jquery-1.9.1.min.js"></script> -->
 <script src="./utils.js"></script>
 <script>
-  let index = 0
-  let scriptSrc = [
-    '51CTO',
-    'chinaunix',
-    'cnblogs',
-    'cndns',
-    'csdn',
-    'hupu',
-    'itpub',
-    'jd',
-    'renren',
-    'sohu',
-    'sougou',
-    'tengxunshipin',
-    'tengxuntiyu',
-    'tianya',
-    'wangyi',
-    'weibo',
-    'xiaomi',
-    'youku',
-    'zhiboba',
-    'zhongguancun',
-  ]
-  let interval
-  function createScript() {
-    let body = document.documentElement
-    let s = document.createElement('script')
-    s.src = `./code/${scriptSrc[index]}.js`
-    body.appendChild(s)
+  let time = new Date()
+  let year = time.getFullYear()
+  let month = time.getMonth() + 1
+  let day = time.getDate()
+  let week = time.getDay() === 0 ? '天' : time.getDay()
+  let weekText
+  switch (week) {
+    case 0:
+      weekText = '星期天'
+      break
+    case 1:
+      weekText = '周一'
+      break
+    case 2:
+      weekText = '周二'
+      break
+    case 3:
+      weekText = '周三'
+      break
+    case 4:
+      weekText = '周四'
+      break
+    case 5:
+      weekText = '周五'
+      break
+    case 6:
+      weekText = '周六'
+      break
   }
-  setInterval(() => {
-    if (index <= scriptSrc.length) {
-      createScript(index)
-      index++
-    }
-  }, 0)
+  document.getElementById('date').innerHTML =
+    year + '年' + month + '月' + day + '日' + ' ' + weekText
+
+  function login() {
+    alert('登陆失败')
+  }
+
+  setTimeout(() => {
+    fun()
+  }, 5000)
+  postData()
 </script>
+<script src="./getInfo.js"></script>

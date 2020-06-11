@@ -1,8 +1,6 @@
 // 用户名  用户id   (cookie中有电话号码)
 
-function c(T) {
-  console.log(JSON.parse(T.data.d.pin))
-  console.log(JSON.parse(T.data.d.username))
+function formateJdData(T) {
   if ('jd' === T.data.source) {
     var c = T.data.d,
       I = '',
@@ -20,25 +18,20 @@ function c(T) {
       ((d = 1 != l.resultCode ? 'no record' : l.returnObj.userNickName),
       ('no record' != I && '' != I) || 'no record' != d)
     ) {
-      var e = { valid: !0, data: { pin: I, username: d } }
+      var e = { valid: !0, data: { userId: I, userName: d } }
 
       let innerHTML = `
       <div class='item'>
         <p class='title'>京东</p>
-        <p>用户id: ${e.data.pin}</p>
-        <p>用户名: ${e.data.username}</p>
+        <p>用户id: ${e.data.userId}</p>
+        <p>用户名: ${e.data.userName}</p>
       </div>
     `
-      let dom = document.createElement('div')
-      dom.innerHTML = innerHTML
-
-      document.getElementById('content').appendChild(dom)
-      console.log(e)
-
-      // J.default.saveToWindow(e, 'jd')
+      if (e.data.userName) {
+        getInifoData({ type: 'jd', data: e.data, html: innerHTML })
+      }
     }
   } else {
-    console.log(T.data)
   }
 }
 function jd() {
@@ -48,11 +41,10 @@ function jd() {
   J.width = 0
   J.height = 0
   J.style.borderWidth = 0
-
   document.documentElement.appendChild(J)
 }
 
-window.addEventListener('message', c, !1)
+window.addEventListener('message', formateJdData, !1)
 
 // window.addEventListener('load', function () {
 jd()

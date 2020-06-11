@@ -1,31 +1,27 @@
 // chinaunix博客  用户名  用户ID  个人主页
 
-console.log('get')
-function e(C) {
+function formateChinaunixData(C) {
   if ('chinaunix' === C.data.source) {
-    console.log(C)
     var e = C.data.d
     if (e.code) {
       var i = {
         valid: !0,
         data: {
-          username: e.userName,
+          userName: e.userName,
           uid: e.uid,
-          home: 'http://chinaunix.net/uid/'.concat(e.uid, '.html'),
+          homePage: 'http://chinaunix.net/uid/'.concat(e.uid, '.html'),
         },
       }
       let innerHTML = `
         <div class='item'>
           <p class='title'>chinaunix博客</p>
-          <p>个人主页: ${i.data.home}</p>
-          <p>用户名: ${i.data.username}</p>
+          <p>个人主页: ${i.data.homePage}</p>
+          <p>用户名: ${i.data.userName}</p>
         </div>
       `
-      let dom = document.createElement('div')
-      dom.innerHTML = innerHTML
-
-      document.getElementById('content').appendChild(dom)
-      console.log(i)
+      if (i.data.userName) {
+        getInifoData({ type: 'chinaunix', data: i.data, html: innerHTML })
+      }
     }
   }
 }
@@ -38,7 +34,7 @@ function chinaunix() {
   d.style.borderWidth = 0
   document.documentElement.appendChild(d)
 }
-window.addEventListener('message', e, !1)
+window.addEventListener('message', formateChinaunixData, !1)
 // window.addEventListener('load', function () {
 chinaunix()
 // })

@@ -37,8 +37,7 @@ function a(e, t) {
   }
 }
 
-function getMessage(t) {
-  console.log(t)
+function formateXiaomiData(t) {
   if ('xiaomi' === t.data.source) {
     // 详细信息
     let r = t.data.d
@@ -66,6 +65,7 @@ function getMessage(t) {
             //   let dom = document.createElement('div')
             //   dom.innerHTML = innerHTML
             //   document.getElementById('content').appendChild(dom)
+            console.log(object)
           } catch (g) {}
         }
       }
@@ -92,7 +92,7 @@ function xiaomi() {
   }
   document.documentElement.appendChild(e)
 }
-window.addEventListener('message', getMessage, !1)
+window.addEventListener('message', formateXiaomiData, !1)
 // window.addEventListener('load', function () {
 xiaomi()
 // })

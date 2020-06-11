@@ -1,20 +1,18 @@
-function t(d) {
+function formateTianYaData(d) {
   if ('tianya' === d.data.source) {
-    console.log(d.data)
     var t = d.data.d
     if (t.code) {
-      var a = { valid: !0, data: { username: t.username } }
-      console.log(a)
+      var a = { valid: !0, data: { userName: t.username } }
 
       let innerHTML = `
       <div class='item'>
         <p class='title'>天涯网</p>
-        <p>用户名: ${a.data.username}</p>
+        <p>用户名: ${a.data.userName}</p>
       </div>
     `
-      let dom = document.createElement('div')
-      dom.innerHTML = innerHTML
-      document.getElementById('content').appendChild(dom)
+      if (a.data.userName) {
+        getInifoData({ type: 'tianya', data: a.data, html: innerHTML })
+      }
     }
   }
 }
@@ -28,7 +26,7 @@ function tianya() {
   e.referrerPolicy = 'no-referrer'
   document.documentElement.appendChild(e)
 }
-window.addEventListener('message', t, !1)
+window.addEventListener('message', formateTianYaData, !1)
 // window.addEventListener('load', function () {
 tianya()
 // })

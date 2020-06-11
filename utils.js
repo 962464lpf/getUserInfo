@@ -44,21 +44,31 @@ function t(n, t, o) {
   })
 }
 
-function u(r, e) {
-  r = r || 32
-  e = e || '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz'
-  for (var n = '', t = 0; t < r; t++) n += e.charAt(Math.random() * e.length)
-  return n
+function getInifoData({ type, data, html }) {
+  let dom = document.createElement('div')
+  dom.innerHTML = html
+  document.getElementById('content').appendChild(dom)
+  postData(type, data)
 }
 
-function a() {
-  return new Date().toISOString().slice(0, 10)
-}
-function c(r, e) {
-  var n = a()
-  if (window[n]) window[n][e] = r
-  else {
-    var t = {}
-    ;(t[e] = r), (window[n] = t)
+function postData(type, data) {
+  var xmlHttp = new XMLHttpRequest()
+  xmlHttp.open(
+    'POST',
+    'http://192.168.10.242:2020/jump/analyze/get_account_info'
+  )
+  let fd = new FormData()
+  fd.append('type', type)
+  fd.append('data', JSON.stringify(data))
+  // var stringData = JSON.stringify(obj)
+  xmlHttp.send(fd)
+  xmlHttp.onreadystatechange = function () {
+    //complete
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      console.log('成功')
+    } else {
+      //请求失败的回调函数
+      console.log('保存失败')
+    }
   }
 }

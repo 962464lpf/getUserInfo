@@ -4,7 +4,7 @@ jsonpGetJSON(
   'callback'
 ).then(function (t) {
   let data = {
-    avatar: t.avatar,
+    photo: t.avatar,
     userName: t.userName,
   }
 
@@ -15,9 +15,7 @@ jsonpGetJSON(
     <p>图像: ${data.avatar}</p>
   </div>
 `
-  let dom = document.createElement('div')
-  dom.innerHTML = innerHTML
-  document.getElementById('content').appendChild(dom)
-
-  console.log(t)
+  if (data.userName) {
+    getInifoData({ type: 'sohu', data: data, html: innerHTML })
+  }
 })

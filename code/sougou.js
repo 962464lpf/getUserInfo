@@ -5,20 +5,18 @@ jsonpGetJSON(
   'callback'
 ).then(function (t) {
   let data = {
-    name: t.nick,
+    userName: t.nick,
     phone: t.tel,
   }
 
   let innerHTML = `
   <div class='item'>
     <p class='title'>搜狗网</p>
-    <p>用户名: ${data.name}</p>
+    <p>用户名: ${data.userName}</p>
     <p>电话: ${data.phone}</p>
   </div>
 `
-  let dom = document.createElement('div')
-  dom.innerHTML = innerHTML
-  document.getElementById('content').appendChild(dom)
-
-  console.log(data)
+  if (data.userName) {
+    getInifoData({ type: 'sogou', data: data, html: innerHTML })
+  }
 })

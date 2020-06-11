@@ -1,0 +1,111 @@
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#container .header {
+  width: 100%;
+  height: 83px;
+  display: flex;
+  border: 1px solid #cccccc;
+  border-top: 7px solid #339f8a;
+  line-height: 83px;
+}
+#container .header .header_title {
+  width: 245%;
+  height: 50px;
+  position: relative;
+  top: 50%;
+  margin-top: -25px;
+  padding-left: 40px;
+}
+#container .header .header_title img {
+  height: 41px;
+}
+#container .header .header_date {
+  width: 50%;
+}
+#container .content {
+  width: 100%;
+  flex: 1;
+}
+#container .content .login_box {
+  width: 360px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  margin-top: -150px;
+  left: 50%;
+  margin-left: -200px;
+  border: 1px solid #bebebe;
+  font-family: 'ArialMT', 'Arial';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  color: #333333;
+  text-align: center;
+  line-height: normal;
+  border-radius: 5px;
+  box-shadow: 4px 2px 7px #b7b6b6;
+  padding: 9px 30px;
+  box-sizing: border-box;
+}
+#container .content .login_box > div > p img {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: -125px;
+  top: 28px;
+}
+#container .content .login_box .login_title {
+  height: 50px;
+  line-height: 50px;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 20px;
+  font-family: 'PingFangSC-Medium', 'PingFang SC Medium', 'PingFang SC';
+  font-weight: 500;
+  font-style: normal;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+#container .content .login_box .username input,
+#container .content .login_box .password input {
+  width: 100%;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding-left: 43px;
+  box-sizing: border-box;
+  outline: none;
+}
+#container .content .login_box .login_btn {
+  width: 100%;
+  height: 32px;
+  background: #339f8a;
+  color: #fff;
+  border-radius: 7px;
+  font-family: 'PingFangSC-Regular', 'PingFang SC';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  margin-top: 30px;
+  outline: none;
+  cursor: pointer;
+}
+#container .footer {
+  width: 100%;
+  height: 105px;
+  text-align: center;
+  padding-top: 20px;
+  border-bottom: 15px solid #339f8a;
+}
+#container .footer p {
+  margin: 10px 0;
+  font-family: 'PingFangSC-Regular', 'PingFang SC';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  color: #7a869a;
+}

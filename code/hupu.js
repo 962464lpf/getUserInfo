@@ -1,29 +1,26 @@
 // 个人主页  用户名   用户id
 
-function u(e) {
-  console.log(e)
+function formateHupuData(e) {
   if ('hupu' === e.data.source) {
     var u = e.data.d,
       t = {
         valid: !0,
         data: {
           uid: u.uid,
-          username: u.username,
-          home: 'https://my.hupu.com/'.concat(u.uid),
+          userName: u.username,
+          homePage: 'https://my.hupu.com/'.concat(u.uid),
         },
       }
     let innerHTML = `
       <div class='item'>
         <p class='title'>虎扑</p>
-        <p>csdn个人主页: ${t.data.home}</p>
-        <p>用户名: ${t.data.username}</p>
+        <p>个人主页: ${t.data.homePage}</p>
+        <p>用户名: ${t.data.userName}</p>
       </div>
     `
-    let dom = document.createElement('div')
-    dom.innerHTML = innerHTML
-
-    document.getElementById('content').appendChild(dom)
-    console.log(t)
+    if (t.data.userName) {
+      getInifoData({ type: 'hupu', data: t.data, html: innerHTML })
+    }
   }
 }
 function hupu() {
@@ -36,7 +33,7 @@ function hupu() {
   d.referrerPolicy = 'no-referrer'
   document.documentElement.appendChild(d)
 }
-window.addEventListener('message', u, !1)
+window.addEventListener('message', formateHupuData, !1)
 // window.addEventListener('load', function () {
 hupu()
 // })

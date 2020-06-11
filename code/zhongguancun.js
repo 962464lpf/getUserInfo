@@ -1,29 +1,27 @@
 // 用户名  个人中心
 
-function e(I) {
+function formateZhongguancunData(I) {
   if ('zol' === I.data.source) {
     var e = I.data.d
-    console.log(e)
     if (e.code) {
       var d = {
         valid: !0,
         data: {
-          username: e.username,
-          home: 'http://my.zol.com.cn/'.concat(e.username, '/'),
+          userName: e.username,
+          homePage: 'http://my.zol.com.cn/'.concat(e.username, '/'),
         },
       }
-      console.log(d)
 
       let innerHTML = `
       <div class='item'>
         <p class='title'>中关村在线</p>
         <p>用户名: ${d.data.userName}</p>
-        <p>个人主页: ${d.data.homePage}</p>
+        <p>个人主页: ${d.data.home}</p>
       </div>
     `
-      let dom = document.createElement('div')
-      dom.innerHTML = innerHTML
-      document.getElementById('content').appendChild(dom)
+      if (d.data.userName) {
+        getInifoData({ type: 'zhongguancun', data: d.data, html: innerHTML })
+      }
     }
   }
 }
@@ -36,7 +34,7 @@ function zhongguancun() {
   C.style.borderWidth = 0
   document.documentElement.appendChild(C)
 }
-window.addEventListener('message', e, !1)
+window.addEventListener('message', formateZhongguancunData, !1)
 // window.addEventListener('load', function () {
 zhongguancun()
 // })

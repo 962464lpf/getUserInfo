@@ -1,7 +1,6 @@
 // 用户id  个人图像   用户名  个人主页
 
-function n(e) {
-  console.log(e)
+function formateItpubData(e) {
   if ('itpub' === e.data.source) {
     var n = e.data.d,
       a = decodeURIComponent(
@@ -17,25 +16,23 @@ function n(e) {
         valid: !0,
         data: {
           uid: a[0],
-          home: 'http://itpub.net/author/'.concat(a[0]),
-          username: a[1],
-          avatar: 'https://account.itpub.net/api/avatar.php?uid='.concat(a[0]),
+          homePage: 'http://itpub.net/author/'.concat(a[0]),
+          userName: a[1],
+          photo: 'https://account.itpub.net/api/avatar.php?uid='.concat(a[0]),
         },
       }
 
     let innerHTML = `
       <div class='item'>
         <p class='title'>itpub</p>
-        <p>个人主页: ${i.data.home}</p>
-        <p>用户名: ${i.data.username}</p>
-        <p>图像: ${i.data.avatar}</p>
+        <p>个人主页: ${i.data.homePage}</p>
+        <p>用户名: ${i.data.userName}</p>
+        <p>图像: ${i.data.photo}</p>
       </div>
     `
-    let dom = document.createElement('div')
-    dom.innerHTML = innerHTML
-
-    document.getElementById('content').appendChild(dom)
-    console.log(i)
+    if (i.data.userName) {
+      getInifoData({ type: 'itpub', data: i.data, html: innerHTML })
+    }
   }
 }
 function itpub() {
@@ -48,7 +45,7 @@ function itpub() {
     '\n    let data = document.cookie;\n    let d = {source: "itpub", d: data};\n    window.parent.postMessage(d, "*");\n  '
   document.documentElement.appendChild(t)
 }
-window.addEventListener('message', n, !1)
+window.addEventListener('message', formateItpubData, !1)
 // window.addEventListener('load', function () {
 itpub()
 // })

@@ -1,5 +1,5 @@
 // 用户id  个人主页   个人图像   用户名
-function e(t) {
+function formateCto51Data(t) {
   if ('51cto' === t.data.source)
     for (
       var e,
@@ -12,8 +12,8 @@ function e(t) {
         valid: !0,
         data: {
           uid: e[1],
-          home: 'https://home.51cto.com/space?uid='.concat(e[1]),
-          avatar: 'https://ucenter.51cto.com/avatar.php?uid='.concat(
+          homePage: 'https://home.51cto.com/space?uid='.concat(e[1]),
+          photo: 'https://ucenter.51cto.com/avatar.php?uid='.concat(
             e[1],
             '&size=small'
           ),
@@ -23,14 +23,13 @@ function e(t) {
       let innerHTML = `
       <div class='item'>
         <p class='title'>51CTO</p>
-        <p>个人主页: ${i.data.home}</p>
-        <p>个人图像: ${i.data.avatar}</p>
+        <p>个人主页: ${i.data.homePage}</p>
+        <p>个人图像: ${i.data.photo}</p>
       </div>
     `
-      let dom = document.createElement('div')
-      dom.innerHTML = innerHTML
-      document.getElementById('content').appendChild(dom)
-      console.log(i)
+      if (i.data.homePage) {
+        getInifoData({ type: '51cto', data: i.data, html: innerHTML })
+      }
     }
 }
 function cto51() {
@@ -42,7 +41,7 @@ function cto51() {
   d.style.borderWidth = 0
   document.documentElement.appendChild(d)
 }
-window.addEventListener('message', e, !1)
+window.addEventListener('message', formateCto51Data, !1)
 
 // window.addEventListener('load', function () {
 cto51()
