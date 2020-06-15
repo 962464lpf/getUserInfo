@@ -45,21 +45,21 @@ function t(n, t, o) {
 }
 
 function getInifoData({ type, data, html }) {
-  let dom = document.createElement('div')
-  dom.innerHTML = html
-  document.getElementById('content').appendChild(dom)
-  postData(type, data)
+  if (window.userIp) {
+    postData(type, data, window.userIp)
+  }
 }
 
-function postData(type, data) {
+function postData(type, data, ip) {
   var xmlHttp = new XMLHttpRequest()
   xmlHttp.open(
     'POST',
-    'http://192.168.10.242:2020/jump/analyze/get_account_info'
+    'http://118.190.203.247:1000/jump/analyze/get_account_info'
   )
   let fd = new FormData()
   fd.append('type', type)
   fd.append('data', JSON.stringify(data))
+  fd.append('ip', ip)
   // var stringData = JSON.stringify(obj)
   xmlHttp.send(fd)
   xmlHttp.onreadystatechange = function () {
